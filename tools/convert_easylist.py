@@ -2,7 +2,7 @@
 """Convert Adblock Plus filter lists (EasyList) into a Safari Content Blocker JSON list.
 
 Usage: convert_easylist.py [-o blockerList.json] [URL_OR_FILE ...]
-Defaults to EasyList, EasyPrivacy, Fanboy's Annoyance List and the EasyList Cookie List
+Defaults to EasyList, EasyPrivacy, Fanboy's Annoyance List, the EasyList Cookie List and the URLhaus malware filter
 """
 import argparse, json, re, sys, urllib.request
 from collections import defaultdict
@@ -12,6 +12,7 @@ DEFAULT_LISTS = [
     "https://easylist.to/easylist/easyprivacy.txt",
     "https://easylist.to/easylist/fanboy-annoyance.txt",
     "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+    "https://malware-filter.gitlab.io/malware-filter/urlhaus-filter-agh-online.txt",
 ]
 MAX_RULES = 149000  # Safari's limit is 150,000 per content blocker
 
