@@ -8,6 +8,16 @@
       "matches": [
         "<all_urls>"
       ],
+      "js": [
+        "guard-loader.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
       "css": [
         "generic.css"
       ],
@@ -31,10 +41,11 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "inject.js"
+        "inject.js",
+        "popup-guard.js"
       ],
       "matches": [
-        "*://*.youtube.com/*"
+        "<all_urls>"
       ]
     }
   ],

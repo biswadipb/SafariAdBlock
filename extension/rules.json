@@ -1698,5 +1698,257 @@
     "other"
    ]
   }
+ },
+ {
+  "id": 86,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||popads.net^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 87,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||propellerads.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 88,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||exoclick.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 89,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||juicyads.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 90,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||trafficjunky.net^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 91,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||adcash.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 92,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||clickadu.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 93,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||hilltopads.net^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 94,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||popcash.net^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 95,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||adsterra.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 96,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||richpush.co^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 97,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||trafficstars.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 98,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||mgid.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 99,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||revcontent.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 100,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||zedo.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 101,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||onclickads.net^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 102,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||ad-maven.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
+ },
+ {
+  "id": 103,
+  "priority": 2,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||admaven.com^",
+   "resourceTypes": [
+    "main_frame",
+    "sub_frame"
+   ]
+  }
  }
 ]
