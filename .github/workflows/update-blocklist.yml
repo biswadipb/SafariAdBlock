@@ -1,0 +1,32 @@
+name: Update blocklist
+
+on:
+  schedule:
+    - cron: "17 4 * * *"   # daily, 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to create/update the release
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Convert filter lists and validate with WebKit
+        run: ./tools/update_blocklist.sh
+
+      - name: Publish to the rolling "blocklist-latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          FILE="Safari Ad Blocker/Safari Ad Blocker Content Blocker/blockerList.json"
+          RULES=$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$FILE")
+          NOTES="Rebuilt $(date -u +'%Y-%m-%d %H:%M UTC') with $RULES rules. Download with ./tools/fetch_blocklist.sh"
+          if gh release view blocklist-latest >/dev/null 2>&1; then
+            gh release upload blocklist-latest "$FILE" --clobber
+            gh release edit blocklist-latest --notes "$NOTES"
+          else
+            gh release create blocklist-latest "$FILE" --title "Latest blocklist" --notes "$NOTES"
+          fi
