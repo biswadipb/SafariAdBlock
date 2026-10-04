@@ -4,7 +4,7 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 
 ## Features
 
-- **EasyList filtering (Content Blocker):** ~135,000 rules converted from [EasyList](https://easylist.to) (ads), EasyPrivacy (trackers), Fanboy's Annoyance List (popups, social widgets) the EasyList Cookie List (cookie banners) and the URLhaus malware filter (known malware and phishing hosts) and EasyList Adult (ads on adult sites) block ad, tracker and malicious requests and hide ads, cookie notices and other page clutter on every site. Runs inside Safari's native content-blocking engine, so it is fast and private.
+- **EasyList filtering (Content Blocker):** ~147,500 rules converted from [EasyList](https://easylist.to) (ads), EasyPrivacy (trackers), Fanboy's Annoyance List (popups, social widgets) the EasyList Cookie List (cookie banners) and the URLhaus malware filter (known malware and phishing hosts) EasyList Adult (ads on adult sites), NoCoin (in-browser crypto miners) and Dandelion Sprout's Anti-Malware List (malware and scam sites) block ad, tracker and malicious requests and hide ads, cookie notices and other page clutter on every site. Runs inside Safari's native content-blocking engine, so it is fast and private.
 - **Extra ad/tracker rules:** a hand-picked set of 85+ domains plus generic ad-container hiding (`extension/rules.json`, `extension/generic.css`).
 - **Popup and redirect protection:** blocks popups and popunders without a click, off-site auto-redirects, click-hijacking overlays, and popunder networks.
 - **YouTube:** strips ad data from the player and auto-skips any ad that still plays.
@@ -38,13 +38,13 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 
 ## Updating
 
-**Refresh the filter lists** (they change daily; the malware list updates every 12 hours). This downloads the latest EasyList, EasyPrivacy, Fanboy's Annoyance List, EasyList Cookie List, URLhaus malware filter and EasyList Adult, converts it, checks it with WebKit's own rule compiler, and installs it:
+**Refresh the filter lists** (they change daily; the malware list updates every 12 hours). This downloads the latest EasyList, EasyPrivacy, Fanboy's Annoyance List, EasyList Cookie List, URLhaus malware filter, EasyList Adult, NoCoin and Dandelion Sprout's Anti-Malware List, converts it, checks it with WebKit's own rule compiler, and installs it:
 
 ```bash
 ./tools/update_blocklist.sh
 ```
 
-Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use other lists, pass their URLs, for example `./tools/update_blocklist.sh https://easylist.to/easylist/easylist.txt https://easylist.to/easylist/easyprivacy.txt`. Passing URLs replaces the default set, so list every one you want. Safari allows at most 150,000 rules per Content Blocker, and the converter trims anything above that. The default set uses about 135,000. Sites that share identical hiding rules are merged to save space.
+Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use other lists, pass their URLs, for example `./tools/update_blocklist.sh https://easylist.to/easylist/easylist.txt https://easylist.to/easylist/easyprivacy.txt`. Passing URLs replaces the default set, so list every one you want. Safari allows at most 150,000 rules per Content Blocker, and the converter trims anything above that. The default set uses about 147,500. Sites that share identical hiding rules are merged to save space.
 
 **Edit the web extension.** Change files in `extension/`. The Xcode project references them directly, so just rebuild with ⌘R.
 
@@ -58,4 +58,4 @@ Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use
 
 ## Limitations
 
-Safari's content blocker cannot run EasyList's advanced rules (scriptlets, `:has-text()` selectors, redirects and similar), so about 2,800 lines are skipped. It also cannot intercept a page changing its own address with `location.href`. Coverage is close to, but not the same as, uBlock Origin.
+Safari's content blocker cannot run EasyList's advanced rules (scriptlets, `:has-text()` selectors, redirects and similar), so about 4,100 lines are skipped. It also cannot intercept a page changing its own address with `location.href`. Coverage is close to, but not the same as, uBlock Origin.
