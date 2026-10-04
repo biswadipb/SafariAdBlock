@@ -16,29 +16,20 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 
 ## Installation
 
-1. **Clone the repo**
+**See [INSTALL.md](INSTALL.md) for the full step-by-step guide**, including the two ways to sign the app and fixes for common keychain and signing problems.
+
+Quick version:
+
+1. Clone the repo and download the blocklist:
    ```bash
-   git clone https://github.com/biswadipb/SafariAdBlock.git
-   cd SafariAdBlock
+   git clone https://github.com/biswadipb/SafariAdBlock.git ~/SafariAdBlock
+   cd ~/SafariAdBlock && ./tools/fetch_blocklist.sh
    ```
-2. **Download the blocklist.** It is built daily by GitHub Actions and is not stored in git:
-   ```bash
-   ./tools/fetch_blocklist.sh
-   ```
-3. **Open the project in Xcode**
-   ```bash
-   open "Safari Ad Blocker/Safari Ad Blocker.xcodeproj"
-   ```
-4. **Set up signing.** Click the project in the left sidebar. For **all three** targets ("Safari Ad Blocker", "Safari Ad Blocker Extension" and "Safari Ad Blocker Content Blocker"), open **Signing & Capabilities** and either:
-   - choose your **Team** (a free Apple ID works), and change the **Bundle Identifier** to something unique. Keep the prefix shared: `com.yourname.safariadblock` for the app, `com.yourname.safariadblock.Extension` for the web extension and `com.yourname.safariadblock.ContentBlocker` for the content blocker, or
-   - set Signing Certificate to **Sign to Run Locally**.
-5. **Build and run.** Choose the **Safari Ad Blocker** scheme with **My Mac** as the destination, then press **⌘R**. A small app window opens; you can leave it.
-6. **Allow unsigned extensions** (only if you used "Sign to Run Locally" or Safari doesn't list the extension). In Safari, open **Develop → Allow Unsigned Extensions** and enter your password. If you don't see a Develop menu, enable it under **Safari → Settings → Advanced → Show features for web developers**. This setting resets every time Safari quits.
-7. **Enable both extensions.** In Safari, open **Safari → Settings → Extensions** and tick:
-   - **Safari Ad Blocker Content Blocker** (the EasyList rules)
-   - **Safari Ad Blocker Extension** (popup/redirect protection and YouTube)
-8. **Grant website access.** Select **Safari Ad Blocker Extension** and set **Always Allow on Every Website** (or choose **Allow** when prompted). Without this, popup protection and YouTube skipping will not work. The Content Blocker needs no permissions.
-9. **Test it.** Reload any page, for example a YouTube video.
+2. Open `Safari Ad Blocker/Safari Ad Blocker.xcodeproj` in Xcode.
+3. For **all three targets**, open **Signing & Capabilities** and either set **Signing Certificate** to **Sign to Run Locally** (untick automatic signing), or choose your **Team** and give each target a unique Bundle Identifier.
+4. Press **⌘R** with the **Safari Ad Blocker** scheme and **My Mac** selected.
+5. In Safari, turn on **Develop → Allow Unsigned Extensions** (only needed for local signing; it resets when Safari quits).
+6. In **Safari → Settings → Extensions**, enable both extensions, and set **Safari Ad Blocker Extension** to **Always Allow on Every Website**.
 
 ## Updating
 
@@ -63,6 +54,8 @@ To use other lists, pass their URLs, for example `./tools/update_blocklist.sh ht
 **Edit the web extension.** Change files in `extension/`. The Xcode project references them directly, so just rebuild with ⌘R.
 
 ## Troubleshooting
+
+See also the troubleshooting section of [INSTALL.md](INSTALL.md).
 
 - **Build fails because `blockerList.json` is missing:** run `./tools/fetch_blocklist.sh` first. The list is not stored in git.
 - **Content Blocker shows an error in Safari:** re-run `./tools/update_blocklist.sh`; it refuses to install a list that WebKit cannot compile.
