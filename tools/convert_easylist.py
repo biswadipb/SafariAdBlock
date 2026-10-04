@@ -157,6 +157,14 @@ def convert(text, stats):
                               "action": {"type": "css-display-none", "selector": selector}})
     return block, css_rules, exceptions
 
+# YouTube's own first-party endpoints (ad pings etc.) must not be blocked: when they are, the
+# player stalls for the length of the ad. The web extension removes/skips the ads instead.
+YOUTUBE_EXEMPTION = {
+    "trigger": {"url-filter": ".*", "load-type": ["first-party"],
+                "if-domain": ["*youtube.com", "*youtube-nocookie.com"]},
+    "action": {"type": "ignore-previous-rules"},
+}
+
 def dedupe(rules):
     seen, out = set(), []
     for r in rules:
@@ -180,11 +188,11 @@ def main():
         block += b; css += c; exc += e
     block, css, exc = dedupe(block), dedupe(css), dedupe(exc)
     # Order matters: blocks, then css, then exceptions that cancel earlier rules.
-    budget = MAX_RULES - len(exc) - len(css)
+    budget = MAX_RULES - len(exc) - len(css) - 1
     if len(block) > budget:
         print(f"warning: trimming {len(block) - budget} network rules to fit Safari's limit", file=sys.stderr)
         block = block[:budget]
-    rules = block + css + exc
+    rules = block + [YOUTUBE_EXEMPTION] + css + exc
     json.dump(rules, open(a.output, "w"), separators=(",", ":"))
     print(f"network blocks: {len(block)}  css-hide: {len(css)}  exceptions: {len(exc)}  "
           f"total: {len(rules)}  skipped(unsupported): {stats['skipped']}")
