@@ -2,12 +2,15 @@
 """Convert Adblock Plus filter lists (EasyList) into a Safari Content Blocker JSON list.
 
 Usage: convert_easylist.py [-o blockerList.json] [URL_OR_FILE ...]
-Defaults to https://easylist.to/easylist/easylist.txt
+Defaults to EasyList + EasyPrivacy from easylist.to
 """
 import argparse, json, re, sys, urllib.request
 from collections import defaultdict
 
-DEFAULT_LISTS = ["https://easylist.to/easylist/easylist.txt"]
+DEFAULT_LISTS = [
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+]
 MAX_RULES = 149000  # Safari's limit is 150,000 per content blocker
 
 TYPE_MAP = {

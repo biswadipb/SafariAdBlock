@@ -4,7 +4,7 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 
 ## Features
 
-- **EasyList filtering (Content Blocker):** ~62,000 rules converted from [EasyList](https://easylist.to) block ad and tracker requests and hide ad elements on every site. Runs inside Safari's native content-blocking engine, so it is fast and private.
+- **EasyList filtering (Content Blocker):** ~118,000 rules converted from [EasyList](https://easylist.to) (ads) and EasyPrivacy (trackers) block ad and tracker requests and hide ad elements on every site. Runs inside Safari's native content-blocking engine, so it is fast and private.
 - **Extra ad/tracker rules:** a hand-picked set of 85+ domains plus generic ad-container hiding (`extension/rules.json`, `extension/generic.css`).
 - **Popup and redirect protection:** blocks popups and popunders without a click, off-site auto-redirects, click-hijacking overlays, and popunder networks.
 - **YouTube:** strips ad data from the player and auto-skips any ad that still plays.
@@ -38,13 +38,13 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 
 ## Updating
 
-**Refresh EasyList** (it changes daily). This downloads the latest list from easylist.to, converts it, checks it with WebKit's own rule compiler, and installs it:
+**Refresh the filter lists** (they change daily). This downloads the latest EasyList and EasyPrivacy from easylist.to, converts it, checks it with WebKit's own rule compiler, and installs it:
 
 ```bash
 ./tools/update_blocklist.sh
 ```
 
-Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use other lists, pass their URLs, for example `./tools/update_blocklist.sh https://easylist.to/easylist/easylist.txt https://easylist.to/easylist/easyprivacy.txt`. Safari allows at most 150,000 rules per Content Blocker, and the converter trims anything above that.
+Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use other lists, pass their URLs, for example `./tools/update_blocklist.sh https://easylist.to/easylist/easylist.txt https://easylist.to/easylist/fanboy-annoyance.txt`. Safari allows at most 150,000 rules per Content Blocker, and the converter trims anything above that.
 
 **Edit the web extension.** Change files in `extension/`. The Xcode project references them directly, so just rebuild with ⌘R.
 
@@ -57,4 +57,4 @@ Then rebuild with ⌘R. You need Python 3 and Xcode's command line tools. To use
 
 ## Limitations
 
-Safari's content blocker cannot run EasyList's advanced rules (scriptlets, `:has-text()` selectors, redirects and similar), so about 1,200 lines are skipped. It also cannot intercept a page changing its own address with `location.href`. Coverage is close to, but not the same as, uBlock Origin.
+Safari's content blocker cannot run EasyList's advanced rules (scriptlets, `:has-text()` selectors, redirects and similar), so about 1,300 lines are skipped. It also cannot intercept a page changing its own address with `location.href`. Coverage is close to, but not the same as, uBlock Origin.
