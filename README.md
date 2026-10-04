@@ -29,8 +29,8 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
    ```bash
    open "Safari Ad Blocker/Safari Ad Blocker.xcodeproj"
    ```
-4. **Set up signing.** Click the project in the left sidebar. For **both** targets ("Safari Ad Blocker" and "Safari Ad Blocker Extension"), open **Signing & Capabilities** and either:
-   - choose your **Team** (a free Apple ID works), and change the **Bundle Identifier** to something unique such as `com.yourname.safariadblock` (the extension's must start with the app's), or
+4. **Set up signing.** Click the project in the left sidebar. For **all three** targets ("Safari Ad Blocker", "Safari Ad Blocker Extension" and "Safari Ad Blocker Content Blocker"), open **Signing & Capabilities** and either:
+   - choose your **Team** (a free Apple ID works), and change the **Bundle Identifier** to something unique. Keep the prefix shared: `com.yourname.safariadblock` for the app, `com.yourname.safariadblock.Extension` for the web extension and `com.yourname.safariadblock.ContentBlocker` for the content blocker, or
    - set Signing Certificate to **Sign to Run Locally**.
 5. **Build and run.** Choose the **Safari Ad Blocker** scheme with **My Mac** as the destination, then press **⌘R**. A small app window opens; you can leave it.
 6. **Allow unsigned extensions** (only if you used "Sign to Run Locally" or Safari doesn't list the extension). In Safari, open **Develop → Allow Unsigned Extensions** and enter your password. If you don't see a Develop menu, enable it under **Safari → Settings → Advanced → Show features for web developers**. This setting resets every time Safari quits.
