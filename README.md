@@ -7,7 +7,7 @@ A Safari extension for macOS that blocks ads and trackers on all sites, stops in
 - **EasyList filtering (Content Blocker):** ~147,500 rules converted from [EasyList](https://easylist.to) (ads), EasyPrivacy (trackers), Fanboy's Annoyance List (popups, social widgets) the EasyList Cookie List (cookie banners) and the URLhaus malware filter (known malware and phishing hosts) EasyList Adult (ads on adult sites), NoCoin (in-browser crypto miners) and Dandelion Sprout's Anti-Malware List (malware and scam sites) block ad, tracker and malicious requests and hide ads, cookie notices and other page clutter on every site. Runs inside Safari's native content-blocking engine, so it is fast and private.
 - **Extra ad/tracker rules:** a hand-picked set of 85+ domains plus generic ad-container hiding (`extension/rules.json`, `extension/generic.css`).
 - **Popup and redirect protection:** blocks popups and popunders without a click, off-site auto-redirects, click-hijacking overlays, and popunder networks.
-- **YouTube:** strips ad data from the player and auto-skips any ad that still plays.
+- **YouTube:** strips ad data from the player and auto-skips any ad that still plays. YouTube's own first-party endpoints are deliberately left unblocked (see Troubleshooting).
 
 ## Requirements
 
@@ -58,6 +58,7 @@ To use other lists, pass their URLs, for example `./tools/update_blocklist.sh ht
 See also the troubleshooting section of [INSTALL.md](INSTALL.md).
 
 - **Build fails because `blockerList.json` is missing:** run `./tools/fetch_blocklist.sh` first. The list is not stored in git.
+- **YouTube shows a dark screen and spinner for as long as an ad would last:** this means something is blocking YouTube's own ad requests, so the player waits out the ad. Don't add rules that block `youtube.com/api/stats/ads`, `/pagead`, `/ptracking` or `/get_midroll_`. The Content Blocker has an exemption (`YOUTUBE_EXEMPTION` in `tools/convert_easylist.py`) that cancels blocks on YouTube's first-party requests, and the web extension removes the ads from the player data and skips them instead. If you see this after updating, run `./tools/fetch_blocklist.sh`, rebuild with ⌘R, then quit and reopen Safari.
 - **Content Blocker shows an error in Safari:** re-run `./tools/update_blocklist.sh`; it refuses to install a list that WebKit cannot compile.
 - **Extension not in the list:** run the app from Xcode once and make sure the unsigned-extensions setting from step 5 is on.
 - **A page is greyed out or won't scroll after a cookie banner disappears:** the cookie list hides the banner but doesn't accept or reject cookies. Disable the Content Blocker for that site under Safari → Settings → Websites → Content Blockers.

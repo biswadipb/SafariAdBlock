@@ -133,6 +133,16 @@ Run `./tools/fetch_blocklist.sh` (step 1), then build again.
 
 The list may be corrupt or over Safari's 150,000-rule limit. Run `./tools/fetch_blocklist.sh` again and rebuild. To build the list yourself, run `./tools/update_blocklist.sh`; it refuses to install a list that WebKit cannot compile.
 
+### YouTube shows a dark screen and a spinner for as long as an ad would last
+
+Something is blocking YouTube's own ad requests, so the player waits out the ad before playing the video. The project avoids this by not blocking YouTube's first-party requests (the exemption is `YOUTUBE_EXEMPTION` in `tools/convert_easylist.py`), and by removing the ads from the player data in the web extension instead.
+
+1. Run `./tools/fetch_blocklist.sh` to get the latest list.
+2. Rebuild with **⌘R** in Xcode.
+3. Quit Safari fully (**⌘Q**), reopen it, turn **Allow Unsigned Extensions** back on if you use local signing, and reload YouTube.
+
+If you added your own rules, make sure none block `youtube.com/api/stats/ads`, `/pagead`, `/ptracking` or `/get_midroll_`.
+
 ### A website is broken
 
 Turn off the extensions for that site in **Safari → Settings → Websites** (use the Extensions and Content Blockers entries), then open an issue with the site's name.
