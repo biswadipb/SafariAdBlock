@@ -2,7 +2,7 @@
 """Convert Adblock Plus filter lists (EasyList) into a Safari Content Blocker JSON list.
 
 Usage: convert_easylist.py [-o blockerList.json] [URL_OR_FILE ...]
-Defaults to EasyList + EasyPrivacy from easylist.to
+Defaults to EasyList, EasyPrivacy, Fanboy's Annoyance List and the EasyList Cookie List
 """
 import argparse, json, re, sys, urllib.request
 from collections import defaultdict
@@ -10,6 +10,8 @@ from collections import defaultdict
 DEFAULT_LISTS = [
     "https://easylist.to/easylist/easylist.txt",
     "https://easylist.to/easylist/easyprivacy.txt",
+    "https://easylist.to/easylist/fanboy-annoyance.txt",
+    "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
 ]
 MAX_RULES = 149000  # Safari's limit is 150,000 per content blocker
 
@@ -136,10 +138,14 @@ def convert(text, stats):
         css_rules.append({"trigger": {"url-filter": ".*"},
                           "action": {"type": "css-display-none",
                                      "selector": ", ".join(generic_css[i:i + 500])}})
-    for d, sels in sorted(domain_css.items()):
-        css_rules.append({"trigger": {"url-filter": ".*", "if-domain": [d]},
-                          "action": {"type": "css-display-none",
-                                     "selector": ", ".join(sels)}})
+    # Sites that share an identical selector list share one rule (saves thousands of rules).
+    by_selectors = defaultdict(list)
+    for d, sels in domain_css.items():
+        by_selectors[", ".join(sorted(set(sels)))].append(d)
+    for selector, doms in sorted(by_selectors.items()):
+        for i in range(0, len(doms), 1000):
+            css_rules.append({"trigger": {"url-filter": ".*", "if-domain": sorted(doms[i:i + 1000])},
+                              "action": {"type": "css-display-none", "selector": selector}})
     return block, css_rules, exceptions
 
 def dedupe(rules):
